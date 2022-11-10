@@ -10,9 +10,10 @@ import "../../style/style.css"
 export default function Card(card) {
     const [stars, setStars] = useState(0);
     const [showModal, setShowModal] = useState(false);
-
+    const [disableButton, setDisableButton] = useState();
     useEffect(() => {
         setStars(card.card.numberRating);
+        setDisableButton(card.card.isInstalled)
     }, [])
     return (
         <>
@@ -47,7 +48,7 @@ export default function Card(card) {
                     </Carousel>
                     <Description information={card} stars={stars} />
                     <div style={{ display: "flex", justifyContent: "flex-end", padding: "1.5rem" }}>
-                        <button className='btn btn-success'>Instalar</button>
+                        <button className='btn btn-success' disabled={disableButton} >Instalar</button>
 
                         <button className='btn btn-secondary' onClick={()=> setShowModal(false)}> Cerrar</button>
                     </div>
